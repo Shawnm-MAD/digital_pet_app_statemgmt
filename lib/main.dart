@@ -98,6 +98,48 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
     });
   }
 
+  // Start a timer to check if the happiness level stays above 80 for 3 minutes
+  void _startWinTimer() {
+    _winDuration = 0; // Reset win duration on each play
+    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      if (happinessLevel > 80) {
+        setState(() {
+          _winDuration++;
+        });
+      } else {
+        setState(() {
+          _winDuration = 0; // Reset win duration if happiness drops
+        });
+      }
+
+      if (_winDuration >= 180) { // 3 minutes = 180 seconds
+        _showWinMessage();
+        _timer?.cancel(); // Stop the timer once win condition is met
+      }
+    });
+  }
+
+  // Show win message
+  void _showWinMessage() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("You Win!"),
+          content: Text("Your pet has been happy for 3 minutes! 🎉"),
+          actions: [
+            TextButton(
+              child: Text("OK"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
