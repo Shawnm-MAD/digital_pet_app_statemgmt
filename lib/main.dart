@@ -16,6 +16,7 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
   String petName = "Your Pet";
   int happinessLevel = 50;
   int hungerLevel = 50;
+  int energyLevel = 50;  // New property to track energy
   TextEditingController nameController = TextEditingController();
   bool nameSet = false;
   Timer? hungertimer;
@@ -33,6 +34,13 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
     setState(() {
       hungerLevel = (hungerLevel - 10).clamp(0, 100);
       _updateHappiness();
+    });
+  }
+
+  // Function to increase energy when the pet rests
+  void _restPet() {
+    setState(() {
+      energyLevel = (energyLevel + 20).clamp(0, 100);  // Resting increases energy
     });
   }
 
@@ -197,6 +205,10 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
               'Hunger Level: $hungerLevel',
               style: TextStyle(fontSize: 20.0),
             ),
+            Text(
+              'Energy Level: $energyLevel',
+              style: TextStyle(fontSize: 20.0),
+            ),
             SizedBox(height: 32.0),
             ElevatedButton(
               onPressed: _playWithPet,
@@ -206,6 +218,11 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
             ElevatedButton(
               onPressed: _feedPet,
               child: Text('Feed Your Pet'),
+            ),
+            SizedBox(height: 16.0),
+            ElevatedButton(
+              onPressed: _restPet,
+              child: Text('Rest Your Pet'),
             ),
           ],
         ),
