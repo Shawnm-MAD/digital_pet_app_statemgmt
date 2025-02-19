@@ -84,6 +84,16 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
   }
 }
 
+// Mood indicator
+  String petMood() {
+    if (happinessLevel > 70) {
+      return "Happy 😊";
+    } else if (happinessLevel >= 30) {
+      return "Neutral 😐";
+    } else {
+      return "Unhappy 😞";
+    }
+  }
 
   @override
   void initState() {
