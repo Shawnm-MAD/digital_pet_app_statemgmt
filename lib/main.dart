@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -17,6 +18,7 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
   int hungerLevel = 50;
   TextEditingController nameController = TextEditingController();
   bool nameSet = false;
+  Timer? hungertimer;
 
   // Function to increase happiness and update hunger when playing with the pet
   void _playWithPet() {
@@ -69,6 +71,20 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
     } else {
       return Colors.red;
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    hungertimer = Timer.periodic(Duration(seconds: 30), (timer) {
+      inchunger();
+    });
+  }
+
+  void inchunger() {
+    setState(() {
+      hungerLevel = (hungerLevel + 10).clamp(0, 100);
+    });
   }
 
   @override
