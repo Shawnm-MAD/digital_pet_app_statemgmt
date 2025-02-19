@@ -19,6 +19,7 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
   int energyLevel = 50;  // New property to track energy
   int _winDuration = 0;
   Timer? _timer;
+
   TextEditingController nameController = TextEditingController();
   bool nameSet = false;
   Timer? hungertimer;
@@ -74,25 +75,15 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
   }
 
   Color petcolor() {
-    if (happinessLevel > 70) {
-      return Colors.green;
-    } else if (happinessLevel > 30) {
-      return Colors.yellow;
-    } else {
-      return Colors.red;
-    }
+  if (happinessLevel > 70) {
+    return Colors.green; // Happy (Green)
+  } else if (happinessLevel >= 30) {
+    return Colors.yellow; // Neutral (Yellow)
+  } else {
+    return Colors.red; // Unhappy (Red)
   }
+}
 
-  // Determine pet's color based on happiness level
-  Color _getPetColor() {
-    if (happinessLevel > 70) {
-      return Colors.green; // Happy
-    } else if (happinessLevel >= 30) {
-      return Colors.yellow; // Neutral
-    } else {
-      return Colors.red; // Unhappy
-    }
-  }
 
   @override
   void initState() {
