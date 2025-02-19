@@ -61,6 +61,16 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
     nameController.clear();
   }
 
+  Color petcolor() {
+    if (happinessLevel > 70) {
+      return Colors.green;
+    } else if (happinessLevel > 30) {
+      return Colors.yellow;
+    } else {
+      return Colors.red;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -95,6 +105,15 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
                   ],
                 ),
               ),
+            SizedBox(height: 16),
+            Container(
+              width: 50,
+              height: 50,
+              decoration: BoxDecoration(
+                color: petcolor(),
+                shape: BoxShape.circle,
+              ),
+            ),
             SizedBox(height: 16.0),
             Text(
               'Happiness Level: $happinessLevel',
