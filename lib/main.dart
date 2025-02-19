@@ -15,6 +15,8 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
   String petName = "Your Pet";
   int happinessLevel = 50;
   int hungerLevel = 50;
+  TextEditingController nameController = TextEditingController();
+  bool nameSet = false;
 
   // Function to increase happiness and update hunger when playing with the pet
   void _playWithPet() {
@@ -50,6 +52,15 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
     }
   }
 
+  void setPetName() {
+    setState(() {
+      petName =
+          nameController.text.isNotEmpty ? nameController.text : "Your pet";
+      nameSet = true;
+    });
+    nameController.clear();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,6 +75,26 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
               'Name: $petName',
               style: TextStyle(fontSize: 20.0),
             ),
+            SizedBox(height: 16.0),
+            if (!nameSet)
+              Padding(
+                padding: const EdgeInsets.symmetric(),
+                child: Column(
+                  children: [
+                    TextField(
+                      controller: nameController,
+                      decoration: InputDecoration(
+                        labelText: "Enter Pet Name",
+                      ),
+                    ),
+                    SizedBox(height: 12),
+                    ElevatedButton(
+                      onPressed: setPetName,
+                      child: Text('Enter'),
+                    ),
+                  ],
+                ),
+              ),
             SizedBox(height: 16.0),
             Text(
               'Happiness Level: $happinessLevel',
