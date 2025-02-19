@@ -17,6 +17,8 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
   int happinessLevel = 50;
   int hungerLevel = 50;
   int energyLevel = 50;  // New property to track energy
+  int _winDuration = 0;
+  Timer? _timer;
   TextEditingController nameController = TextEditingController();
   bool nameSet = false;
   Timer? hungertimer;
