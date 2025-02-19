@@ -84,6 +84,16 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
   }
 }
 
+// Mood indicator
+  String petMood() {
+    if (happinessLevel > 70) {
+      return "Happy 😊";
+    } else if (happinessLevel >= 30) {
+      return "Neutral 😐";
+    } else {
+      return "Unhappy 😞";
+    }
+  }
 
   @override
   void initState() {
@@ -157,9 +167,10 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
             ),
             SizedBox(height: 16.0),
             Text(
-              'Happiness Level: $happinessLevel',
-              style: TextStyle(fontSize: 20.0),
-            ),
+            happinessLevel > 70 ? "Happy 😊" :
+            happinessLevel >= 30 ? "Neutral 😐" : "Unhappy 😞",
+            style: TextStyle(fontSize: 20.0),
+          ),
             if (!nameSet)
               Padding(
                 padding: const EdgeInsets.symmetric(),
