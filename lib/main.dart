@@ -73,6 +73,17 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
     }
   }
 
+  // Determine pet's color based on happiness level
+  Color _getPetColor() {
+    if (happinessLevel > 70) {
+      return Colors.green; // Happy
+    } else if (happinessLevel >= 30) {
+      return Colors.yellow; // Neutral
+    } else {
+      return Colors.red; // Unhappy
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -102,6 +113,10 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
               style: TextStyle(fontSize: 20.0),
             ),
             SizedBox(height: 16.0),
+            Text(
+              'Happiness Level: $happinessLevel',
+              style: TextStyle(fontSize: 20.0),
+            ),
             if (!nameSet)
               Padding(
                 padding: const EdgeInsets.symmetric(),
