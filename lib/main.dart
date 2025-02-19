@@ -209,9 +209,11 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
               'Energy Level: $energyLevel',
               style: TextStyle(fontSize: 20.0),
             ),
-            SizedBox(height: 32.0),
             ElevatedButton(
-              onPressed: _playWithPet,
+              onPressed: () {
+                _playWithPet();
+                _startWinTimer(); // Start win timer when playing
+              },
               child: Text('Play with Your Pet'),
             ),
             SizedBox(height: 16.0),
